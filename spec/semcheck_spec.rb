@@ -7,12 +7,17 @@ describe Semcheck do
 
   describe "Application" do
     it 'can be initialized with command line args' do
-      expect(Semcheck::Application.new("foo")).to be_a(Semcheck::Application)
-      expect(Semcheck::Application.new("foo").terms).to eq("foo")
+      expect(Semcheck::Application.new("house")).to be_a(Semcheck::Application)
+      expect(Semcheck::Application.new("house").terms).to eq("house")
     end
     describe "#run" do
-      it 'returns terms' do
-        expect{ Semcheck::Application.new("foo").run }.to output("you gave me foo\n").to_stdout
+      it 'returns terms to stdout' do
+        expect { Semcheck::Application.new("house").run }.
+          to output("Searching semweb resources for: house\n").to_stdout
+      end
+      it 'gets synonyms for terms' do
+        expect(Semcheck::Application.new("restaurant").run).
+          to eq(["eating house","eating place", "building", "edifice"])
       end
     end
   end
