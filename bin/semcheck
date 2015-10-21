@@ -7,5 +7,5 @@ begin
 rescue Errno::ENOENT => err
   abort "semcheck: #{err.message}"
 rescue OptionParser::InvalidOption => err
-  abort "semcheck: #{err.message}\nusage: rcat [-bns] [file ...]"
+  abort "semcheck: #{err.message}\nusage: semcheck [-flags] [file ...]"
 end
