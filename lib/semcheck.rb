@@ -1,5 +1,8 @@
 require "semcheck/version"
 
 module Semcheck
-  # Your code goes here...
+  class Application
+    def initialize(args)
+    end
+  end
 end
