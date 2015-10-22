@@ -27,21 +27,43 @@ module Semcheck
         end
       end
       synonyms.flatten!
-      synonyms.each do |term|
-        # schema.org just uses google to do search
-        schemas << Google::Search::Web.new do |search|
-          search.query = "house" + " site:schema.org"
-        end.map(&:uri)
-      end
+
+      # schema.org just uses google to do search
+      schemas << Google::Search::Web.new do |search|
+        search.query = "site:schema.org " + maybe_array_of(terms).join(" OR ")
+      end.map(&:uri)
+
+      schemas << Google::Search::Web.new do |search|
+        search.query = "site:schema.org " + maybe_array_of(synonyms).join(" OR ")
+      end.map(&:uri)
+
+      @schemas = schemas.flatten.reject! do |url|
+        blacklist.include?(url)
+      end.uniq
+
       return self
     end
 
     private
-    def all_candidates
-      terms + synonyms
+    def maybe_array_of(words)
+      if words.is_a? Array
+        words
+      else
+        [words]
+      end
     end
     def agent
       @agent = Mechanize.new
+    end
+    def blacklist
+      [
+        "http://schema.org/docs/schema_org_rdfa.html",
+        "https://schema.org/docs/schemaorg.owl",
+        "http://schema.org/version/2.0/",
+        "http://schema.org/version/2.1/",
+        "http://blog.schema.org/2011/11/schemaorg-support-for-job-postings.html",
+        "https://bib.schema.org/"
+      ]
     end
   end
 end
