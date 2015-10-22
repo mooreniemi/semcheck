@@ -18,7 +18,9 @@ module Semcheck
 
     def run
       puts "Searching semweb resources for: #{terms}"
-      terms.split(",").each do |term|
+
+      string_or_array_of(terms).each do |term|
+        # bronto gives us a sparse, but local dict
         results = Bronto::Thesaurus.new.lookup(term)
         if !results.nil?
           results.keys.each do |word_type|
@@ -41,10 +43,19 @@ module Semcheck
         blacklist.include?(url)
       end.uniq
 
+      puts "Possible schema matches: #{schemas}"
+
       return self
     end
 
     private
+    def string_or_array_of(terms)
+      if terms.is_a? Array
+        terms
+      else
+        terms.split(",")
+      end
+    end
     def maybe_array_of(words)
       if words.is_a? Array
         words
