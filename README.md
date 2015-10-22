@@ -30,7 +30,7 @@
               /                  \|________)     /  / | |
 
 # Semcheck
-## a command line tool to reconcile your domain model language
+### a command line tool to reconcile your domain model language
 While building an API, you may want to check your potential domain models against existing schemas so that you can leverage established standards.
 
 ## Installation
@@ -51,7 +51,10 @@ Or install it yourself as:
 
 ## Usage
 
-    bin/semcheck searchterm
+    # restaurant is our search term
+    bin/semcheck restaurant
+    => Searching semweb resources for: ["restaurant"]
+    => Possible schema matches: https://schema.org/Restaurant
 
 ## Development
 
