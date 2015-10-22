@@ -45,7 +45,7 @@ module Semcheck
         blacklist.include?(url) || url =~ schema_blog
       end.uniq
 
-      puts "Possible schema matches: #{schemas.join("\n")}"
+      puts "Possible schema matches:\n#{schemas.join("\n")}"
 
       return self
     end
