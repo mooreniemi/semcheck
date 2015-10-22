@@ -79,6 +79,9 @@ module Semcheck
         "https://schema.org/docs/datamodel.html",
         "https://schema.org/docs/schemas.html",
         "https://schema.org/docs/actions.html",
+        "http://schema.org/version/2.0/schema.rdfa",
+        "https://schema.org/docs/gs.html",
+        "https://schema.org/",
         "https://bib.schema.org/"
       ]
     end
