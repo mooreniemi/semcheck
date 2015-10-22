@@ -1,8 +1,5 @@
 # Semcheck
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/semcheck`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+While building an API, you may want to check your potential domain models against existing schemas so that you can leverage established standards.
 
 ## Installation
 
@@ -22,7 +19,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    bin/semcheck searchterm
 
 ## Development
 
