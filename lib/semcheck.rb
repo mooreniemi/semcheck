@@ -1,16 +1,21 @@
 require_relative "semcheck/version"
 require 'bronto'
-require 'mechanize'
-require 'rest-client'
-require 'crack' # for xml and json
+require 'dinosaurus'
+require 'rdf'
+require 'linkeddata'
+# require 'mechanize'
+# require 'rest-client'
+# require 'crack' # for xml and json
 
 module Semcheck
   class Application
-    attr_accessor :terms, :synonyms, :schemas
+    attr_accessor :terms, :synonyms, :schemas, :schema_graph
 
     def initialize(args)
       @terms = args
       @synonyms = []
+      @schema_graph = RDF::Graph.load("http://schema.org/docs/schema_org_rdfa.html")
+      @schemas = []
     end
 
     def run
@@ -25,8 +30,13 @@ module Semcheck
       end
       synonyms.flatten!
 
-      #schema_org_search_form = agent.get("https://schema.org/").form("gsc-search-box")
-      #results = agent.submit(schema_org_search_form, schema_org_search_form.buttons.first)
+      synonyms.each do |term|
+        schemas << RDF::Query.new(
+          {
+            thing: { RDF::URI("http://www.w3.org/2000/01/rdf-schema#label") => term}
+          }
+        ).execute(schema_graph)
+      end
       return self
     end
 
