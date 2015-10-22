@@ -35,15 +35,17 @@ module Semcheck
         search.query = "site:schema.org " + maybe_array_of(terms).join(" OR ")
       end.map(&:uri)
 
+      # oddly, if i just do a giant or chain i can lose
+      # the results i wouldve gotten from the single term
       schemas << Google::Search::Web.new do |search|
         search.query = "site:schema.org " + maybe_array_of(synonyms).join(" OR ")
       end.map(&:uri)
 
       @schemas = schemas.flatten.reject! do |url|
-        blacklist.include?(url)
+        blacklist.include?(url) || url =~ schema_blog
       end.uniq
 
-      puts "Possible schema matches: #{schemas}"
+      puts "Possible schema matches: #{schemas.join("\n")}"
 
       return self
     end
@@ -72,9 +74,16 @@ module Semcheck
         "https://schema.org/docs/schemaorg.owl",
         "http://schema.org/version/2.0/",
         "http://schema.org/version/2.1/",
-        "http://blog.schema.org/2011/11/schemaorg-support-for-job-postings.html",
+        "https://schema.org/docs/full.html",
+        "https://schema.org/QAPage",
+        "https://schema.org/docs/datamodel.html",
+        "https://schema.org/docs/schemas.html",
+        "https://schema.org/docs/actions.html",
         "https://bib.schema.org/"
       ]
+    end
+    def schema_blog
+      /http:\/\/blog.schema.org\//
     end
   end
 end
