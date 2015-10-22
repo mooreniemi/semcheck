@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "bronto-gem"
   # for api thesaurus check
   spec.add_dependency "dinosaurus"
-  spec.add_dependency "linkeddata"
+  spec.add_dependency "google-search"
   spec.add_dependency "crack"
   spec.add_dependency "rest-client"
   spec.add_dependency "mechanize"
