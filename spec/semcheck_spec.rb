@@ -8,13 +8,15 @@ describe Semcheck do
   describe "Application" do
     it 'can be initialized with command line args' do
       expect(Semcheck::Application.new("house")).to be_a(Semcheck::Application)
-      expect(Semcheck::Application.new("house").terms).to eq("house")
+      expect(Semcheck::Application.new("house").terms).to include("house")
+    end
+    it 'can ingest an interpret option flags' do
+      expect(Semcheck::Application.new(["-M", "house"]).flags).to eq(["-M"])
     end
     describe "#run" do
       it 'returns terms to stdout' do
-        pending("unsure if this is useful")
         expect { Semcheck::Application.new("house").run }.
-          to output("Searching semweb resources for: house\n").to_stdout
+          to output(Words::OUTPUT_STRING).to_stdout
       end
       it 'gets synonyms for a term' do
         expect(Semcheck::Application.new("house").run.synonyms).

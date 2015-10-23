@@ -51,6 +51,10 @@ Or install it yourself as:
 
     $ gem install semcheck
 
+To make use of a more extensive thesaurus, you will need to get an API key from [Big Huge Thesaurus](http://words.bighugelabs.com/) and have internet access. Then set:
+
+    $ export BHT_API_KEY=yourkey
+
 ## Usage
 Currently, you must have internet access to use this tool because there's not an easily available database of Schema.org's contents. But using RDF::Querys of a graph database of its schemas may be included in a future minor version.
 
@@ -58,12 +62,21 @@ Currently, you must have internet access to use this tool because there's not an
     bin/semcheck restaurant
     => Searching semweb resources for: ["restaurant"]
     => Possible schema matches: https://schema.org/Restaurant
+    # if you want to make use of the extended thesaurus
+    bin/semcheck -M machine
+
+Using `-M` requires an extra API call but will often give you fewer results. Why? Because the synonyms it chooses are often more specificly related than the more general smattering you'll get from the local thesaurus (sometimes it won't even find a synonym, for even common words like "food").
 
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake rspec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
 To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+
+## TODO
+- integrate Swoogle
+- api thesaurus access
+- local schema database
 
 ## Contributing
 Bug reports and pull requests are welcome on GitHub at [mooreniemi/semcheck](https://github.com/mooreniemi/semcheck). This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.

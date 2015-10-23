@@ -6,12 +6,18 @@ require 'google-search'
 # require 'rest-client'
 # require 'crack' # for xml and json
 
+BHT_API_KEY = ENV['BHT_API_KEY']
+Dinosaurus.configure do |config|
+  config.api_key = BHT_API_KEY
+end
+
 module Semcheck
   class Application
     attr_accessor :terms, :synonyms, :schemas
+    attr_accessor :flags
 
     def initialize(args)
-      @terms = args
+      set_terms_and_flags_from(args)
       @synonyms = []
       @schemas = []
     end
@@ -21,7 +27,12 @@ module Semcheck
 
       string_or_array_of(terms).each do |term|
         # bronto gives us a sparse, but local dict
-        results = Bronto::Thesaurus.new.lookup(term)
+        results = Bronto::Thesaurus.new.lookup(term) || {}
+
+        if !BHT_API_KEY.nil? && flags.include?("-M")
+          results.merge!(Dinosaurus.lookup(term))
+        end
+
         if !results.nil?
           results.keys.each do |word_type|
             synonyms << results[word_type][:syn]
@@ -29,7 +40,6 @@ module Semcheck
         end
       end
       synonyms.flatten!
-
       # schema.org just uses google to do search
       schemas << Google::Search::Web.new do |search|
         search.query = "site:schema.org " + maybe_array_of(terms).join(" OR ")
@@ -48,6 +58,17 @@ module Semcheck
       puts "Possible schema matches:\n#{schemas.join("\n")}"
 
       return self
+    end
+
+    def set_terms_and_flags_from(args)
+      set_flags_from(string_or_array_of(args))
+      set_terms_from(string_or_array_of(args))
+    end
+    def set_flags_from(args)
+      @flags = args.select {|arg| arg =~ /^-[M]/}
+    end
+    def set_terms_from(args)
+      @terms = args.reject {|arg| arg =~ /^-[M]/}
     end
 
     private

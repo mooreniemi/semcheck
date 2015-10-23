@@ -2,7 +2,7 @@ module Words
   SEARCH_STRING = [
     "site:schema.org house", "site:schema.org abode OR audience OR building OR business OR business concern OR business firm OR business organisation OR business organization OR child's play OR community OR concern OR domicile OR dwelling OR dwelling house OR edifice OR family OR family line OR firm OR folk OR general assembly OR habitation OR home OR household OR kinfolk OR kinsfolk OR law-makers OR legislative assembly OR legislative body OR legislature OR management OR mansion OR menage OR part OR phratry OR planetary house OR play OR region OR sept OR sign OR sign of the zodiac OR social unit OR star sign OR theater OR theatre OR unit OR accommodate OR admit OR domiciliate OR hold OR put up OR shelter"
   ]
-
+  OUTPUT_STRING = "Searching semweb resources for: [\"house\"]\nPossible schema matches:\nhttps://schema.org/HousePainter\nhttps://schema.org/Residence\nhttps://schema.org/JobPosting\nhttps://schema.org/RentAction\nhttps://schema.org/Organization\nhttps://schema.org/VideoGame\nhttps://schema.org/PostalAddress\nhttps://schema.org/Game\nhttps://schema.org/Product\nhttps://schema.org/AggregateOffer\nhttps://schema.org/LocalBusiness\nhttps://schema.org/Corporation\nhttps://schema.org/Store\nhttps://schema.org/Person?ext=bib\nhttps://schema.org/Text\nhttps://bib.schema.org/Newspaper\n"
   FRIEND_SYNONYMS = [
     "acquaintance", "admirer", "advocate", "advocator", "ally", "associate", "booster", "champion", "christian", "exponent", "individual", "mortal", "person", "proponent", "protagonist", "quaker", "somebody", "someone", "soul", "supporter"
   ]
