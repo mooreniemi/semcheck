@@ -31,6 +31,8 @@
 
 # Semcheck
 ### a command line tool to reconcile your domain model language
+Think of Semcheck as your helpful automated reference librarian for schemas.
+
 While building an API, you may want to check your potential domain models against existing schemas so that you can leverage established standards.
 
 ## Installation
@@ -50,6 +52,7 @@ Or install it yourself as:
     $ gem install semcheck
 
 ## Usage
+Currently, you must have internet access to use this tool because there's not an easily available database of Schema.org's contents. But using RDF::Querys of a graph database of its schemas may be included in a future minor version.
 
     # restaurant is our search term
     bin/semcheck restaurant
