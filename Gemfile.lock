@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    semcheck (0.1.0)
+    semcheck (0.2.0)
       bronto-gem
       crack
       dinosaurus

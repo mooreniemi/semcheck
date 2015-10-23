@@ -64,8 +64,11 @@ Currently, you must have internet access to use this tool because there's not an
     => Possible schema matches: https://schema.org/Restaurant
     # if you want to make use of the extended thesaurus
     bin/semcheck -M machine
+    => Searching semweb resources for: ["machine"]
+    => Possible schema matches:
+    => https://schema.org/Service
 
-Using `-M` requires an extra API call but will often give you fewer results. Why? Because the synonyms it chooses are often more specificly related than the more general smattering you'll get from the local thesaurus (sometimes it won't even find a synonym, for even common words like "food").
+Using `-M` requires an extra API call but will often give you fewer results. Why? Because the synonyms it chooses are often more specifically related than the more general smattering you'll get from the local thesaurus (sometimes it won't even find a synonym, for even common words like "food").
 
 ## Development
 
@@ -75,7 +78,6 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## TODO
 - integrate Swoogle
-- api thesaurus access
 - local schema database
 
 ## Contributing
