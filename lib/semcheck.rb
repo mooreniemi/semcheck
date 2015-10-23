@@ -65,9 +65,6 @@ module Semcheck
         [words]
       end
     end
-    def agent
-      @agent = Mechanize.new
-    end
     def blacklist
       [
         "http://schema.org/docs/schema_org_rdfa.html",
@@ -82,6 +79,7 @@ module Semcheck
         "http://schema.org/version/2.0/schema.rdfa",
         "https://schema.org/docs/gs.html",
         "https://schema.org/",
+        "http://schema.org/docs/releases.html",
         "https://bib.schema.org/"
       ]
     end
